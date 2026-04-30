@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Sözüm Var</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0e15;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ambient-light {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: drift 10s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        .light-1 {
+            width: 40vw;
+            height: 40vw;
+            background: #2a1b41;
+            top: -10%;
+            left: -10%;
+            animation-duration: 12s;
+        }
+
+        .light-2 {
+            width: 30vw;
+            height: 30vw;
+            background: #1c2b4d;
+            bottom: -10%;
+            right: -10%;
+            animation-duration: 15s;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(30px, 50px) scale(1.1);
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .step {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .step.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            letter-spacing: 1px;
+            color: #e2e8f0;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #a0aec0;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .next-btn,
+        .action-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .next-btn:hover,
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Evet butonu vurgusu */
+        #yesBtn {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .heart {
+            color: #e53e3e;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+
+    <div class="content-wrapper">
+
+        <div class="step active" id="step-1">
+            <h1>Seni yani en değer verdiğim insanı,<br>hiç istemeden kırdım.</h1>
+            <p>Sana söylemek istediğim bazı şeyler var. Lütfen sonuna kadar okur musun Hayatım?</p>
+            <button class="next-btn" onclick="goToStep(2)">Devam Et</button>
+        </div>
+
+        <div class="step" id="step-2">
+            <h1>Keşke zamanı geriye<br>alabilseydim.</h1>
+            <p>O anki düşüncesizliğim yüzünden yüzündeki gülümsemeyi soldurduğum için kendime çok kızgınım. Aşırı
+                aptallık ettim. Benim için
+                ne kadar özel değerli ve önemli olduğunu biliyosundur orda yani of...kendime dicek bi şe bulamıyorum
+                cidden aşırı malım ya , cidden yaptığım şey seni sanki önemsemiyomuşum gibi oldu yaaa offfff
+                -burda tekrar ağladım-</p>
+            <button class="next-btn" onclick="goToStep(3)">Devam Et</button>
+        </div>
+
+        <div class="step" id="step-3">
+            <h1>Çok Özür Dilerim...<br>Lütfen beni affedebilir misin?</h1>
+            <div class="button-group">
+                <button class="action-btn" id="yesBtn" onclick="finish()">Evet</button>
+                <button class="action-btn" id="noBtn" onclick="shrinkNo()">Hayır</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-4">
+            <h1>YEEEEE Teşekkür ederimmmm...</h1>
+            <p>Seni gerçekten çok seviyorum ve aşırı önemlisin benim için seni her şeyden çok seviyorummmmmm.
+            </p>
+            <div class="heart">❤️</div>
+        </div>
+
+    </div>
+
+    <script>
+        let yesSize = 1;
+        let noSize = 1;
+
+        function shrinkNo() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+
+            yesSize += 0.4;
+            yesBtn.style.transform = `scale(${yesSize})`;
+
+
+            noSize -= 0.15;
+            if (noSize < 0.2) noSize = 0.2;
+            noBtn.style.transform = `scale(${noSize})`;
+            noBtn.style.opacity = noSize + 0.2;
+        }
+
+        function goToStep(stepNumber) {
+            const currentActive = document.querySelector('.step.active');
+            currentActive.style.opacity = '0';
+            currentActive.style.transform = 'translateY(-20px)';
+
+            setTimeout(() => {
+                currentActive.classList.remove('active');
+
+                const nextStep = document.getElementById('step-' + stepNumber);
+                nextStep.classList.add('active');
+
+                setTimeout(() => {
+                    nextStep.style.opacity = '1';
+                    nextStep.style.transform = 'translateY(0)';
+                }, 50);
+            }, 500);
+        }
+
+        function finish() {
+            goToStep(4);
+        }
+    </script>
+</body>
+
+</html>
